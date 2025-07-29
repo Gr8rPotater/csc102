@@ -1,0 +1,41 @@
+/* 
+declaration block: 
+
+selector{
+    property: value;
+    property2: value;
+}
+*/
+
+body{
+    background-color:rgb(114, 50, 233);
+    color:rgb(230, 214, 3);
+}   
+
+nav{
+    height: 600px;
+    width: 200px;
+    float: left;
+    padding: 5px;
+    line-height: 30px;
+}
+
+/* chaning the margins to auto centers it on the page for a more appeasing look */
+footer{
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* since I can't center an image like text, turning it into display:block allows it to be formatted better */
+#memeImage{
+    display:block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 400px;
+
+}
+
+h1{
+    text-align: center;
+}

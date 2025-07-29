@@ -1,0 +1,93 @@
+<!--
+Name: Miles Jamesson
+Assignment: Assignment 3.2: User Input Validation 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secret Message Form</title>
+  
+  <!-- Appearance for various aspects -->
+  <style>
+    body {
+      font-family: 'Times New Roman', sans-serif;
+      background-color: rgb(114, 50, 233);
+      text-align: center;
+      margin-right: auto;
+      margin-left: auto;
+      padding-top: 50px;
+    }
+
+    #CAKE{
+        display:block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 400px;
+    }
+
+    form {
+      background-color: #666666;
+      padding: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      width: 300px;
+
+    }
+
+    input {
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #Failure {
+      margin-top: 20px;
+      font-size: 40px;
+      font-weight: bolder;
+      color: #d32f2f;
+    }
+
+    #secret {
+      margin-top: 20px;
+      color: rgb(158, 224, 2);
+      font-size: 40px;
+      font-weight: bolder;
+    }
+
+    img {
+      width: 80px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title -->
+  <h1>🔐 Unlock the Secret Message!</h1>
+
+  <!-- Form creation so that there is somewhere for input -->
+  <form id="secretForm">
+    <!-- First Name Input -->
+    <input type="text" id="firstName" placeholder="First Name" required>
+
+    <!-- Last Name Input -->
+    <input type="text" id="lastName" placeholder="Last Name" required>
+
+    <!-- Zip Code Input -->
+    <input type="text" id="zip" placeholder="Zip Code" required>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Reveal Secret">
+  </form>
+
+  <!-- Success/Failure location -->
+  <div id="Failure"></div>
+  <div id="secret"></div>
+
+  <script src="strings.js"></script>
+</body>
+</html>
