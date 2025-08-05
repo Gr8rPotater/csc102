@@ -20,20 +20,18 @@ nav{
     line-height: 30px;
 }
 
-/* chaning the margins to auto centers it on the page for a more appeasing look */
+/* chaning the margins to auto centers it fits on the page for a more appeasing look */
 footer{
     text-align: center;
     margin-right: auto;
     margin-left: auto;
 }
 
-/* since I can't center an image like text, turning it into display:block allows it to be formatted better */
-#memeImage{
-    display:block;
-    margin-right: auto;
-    margin-left: auto;
-    width: 400px;
-
+#memeImage {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  width: 200px;
 }
 
 h1{
