@@ -31,4 +31,43 @@ form.onsubmit = function(event) {
 
     // Stops the page from refreshing when hitting the submit button
   event.preventDefault();
+
 }
+
+
+  // ------Palindrome area--------
+
+  // Get references to elements for the palindrome area
+  let palindromeInput = document.getElementById("palindromeInput");
+  let palindromeButton = document.getElementById("palindromeButton");
+  let palindromeResultSuccess = document.getElementById("Palindrome");        
+  let palindromeResultFailure = document.getElementById("PalindromeFailure"); 
+
+  // Run when the button is clicked
+  palindromeButton.onclick = function () {
+
+
+    // To remove any previous failure/success
+    palindromeResultSuccess.innerHTML = "";
+    palindromeResultFailure.innerHTML = "";
+
+    // Get user input
+    let text = palindromeInput.value;
+
+    // Remove spaces and lowercase for checking
+    let normal = text.replace(/\s+/g, '').toLowerCase();
+
+    // Reverse the regular text to check if it is a palindrome
+    let reversed = normal.split('').reverse().join('');
+
+    // Display result
+    if (normal && normal === reversed) {
+        document.getElementById("Palindrome").innerHTML = `<p>"${text} is a palindrome!"  </p><Image id="tacocat" src="tacocat.jpg"> </Image>`;
+
+    } else {
+       document.getElementById("PalindromeFailure").innerHTML = `<p> "${text} isnt a palindrome. Try Again" </p>` ;
+    }
+
+    // Clear the input box and results
+    palindromeInput.value = "";
+};
