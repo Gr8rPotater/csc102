@@ -14,7 +14,7 @@ function shootArrow() {
     if (accuracy >= 90) {
         document.getElementById("result").innerHTML = "🎯 Bullseye!"
         img.src="BULLSEYE.png";
-    } else if (accuracy <= 70) {
+    } else if (accuracy >= 70) {
         document.getElementById("result").innerHTML = "🟢 You're Almost There!"
         img.src="So Close.png";
     } else if (accuracy >= 40) {
