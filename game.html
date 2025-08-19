@@ -23,7 +23,25 @@
     <!-- Image should changes based on result -->
     <img id="targetImage" width="200">
 
+    
+    <!-- The sound effect -->
+    <audio id="shootSound" src="bow_shoot.mp3"></audio>
+
     <!-- Link to the JavaScript file -->
     <script src="code.js"></script>
+
+     <script>
+        // Wrap shootArrow so it plays sound as well
+        const originalShootArrow = shootArrow; // keep your existing function
+        shootArrow = function() {
+            // Play the sound
+            const sound = document.getElementById("shootSound");
+            sound.currentTime = 0; // restart if clicked quickly
+            sound.play();
+
+            // Call for the original game logic
+            originalShootArrow();
+        };
+    </script>
 </body>
 </html>
