@@ -1,0 +1,164 @@
+<!-- 
+    Name: Miles Jamesson
+    Assignment: Everything All Together
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emoji Party</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden; /* used to keep the emojis on the screen */
+        }
+        h1 {
+            color: #00ffcc;
+        }
+        form {
+            margin: 20px auto;
+            width: 280px;
+            padding: 12px;
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            background: #111;
+        }
+        input, button {
+            margin: 6px;
+            padding: 6px;
+            width: 90%;
+            font-size: 1.2rem;
+        }
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emoji Party!!!</h1>
+    <h1>The more emoji's you send, the more chaotic the party</h1>
+    <h1>🥔 🗿 🎉 🎈 ❤️ 🍰</h1>
+
+    <!-- Input form -->
+    <form id="emojiForm" onsubmit="return startBounce()">
+        <input type="text" id="emojiInput" placeholder="Enter an emoji">
+        <button type="submit">Bounce!</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        // CLASS for bouncing emoji
+        class Bouncer {
+            constructor(symbol) {
+                this.el = document.createElement("div");
+                this.el.className = "emoji";
+                this.el.innerHTML = symbol;
+                document.body.appendChild(this.el);
+
+                // Random start position and velocity
+                this.x = Math.random() * (window.innerWidth - 40);
+                this.y = Math.random() * (window.innerHeight - 40);
+                this.vx = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? -1 : 1);
+                this.vy = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? -1 : 1);
+            }
+
+            move() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off screen edges
+                if (this.x <= 0 || this.x >= window.innerWidth - 40) {
+                    this.vx *= -1;
+                }
+                if (this.y <= 0 || this.y >= window.innerHeight - 40) {
+                    this.vy *= -1;
+                }
+
+                // Spawn the emojis when submitting
+                this.el.style.left = this.x + "px";
+                this.el.style.top = this.y + "px";
+            }
+
+            // Detect collision with another emoji from the same message
+            collidesWith(other) {
+                let dx = this.x - other.x;
+                let dy = this.y - other.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                return distance < 40; // since emojis are ~40px wide by default
+            }
+
+            // Swap velocities to make it look like they bounce
+            bounceOff(other) {
+                let tempVx = this.vx;
+                let tempVy = this.vy;
+                this.vx = other.vx;
+                this.vy = other.vy;
+                other.vx = tempVx;
+                other.vy = tempVy;
+            }
+        }
+
+        function startBounce() {
+            let emoji = document.getElementById("emojiInput").value.trim();
+
+            // Validation 
+            if (emoji.length === 0) {
+                document.getElementById("message").innerHTML = "Please enter an emoji.";
+                return false;
+            }
+
+            document.getElementById("message").innerHTML =
+                "✅ Watch " + emoji + " have so much fun";
+
+            // Creates a bunch of bouncing emojis
+            let emojis = [];
+            for (let i = 0; i < 20; i++) { // increase to 20 emojis
+                emojis.push(new Bouncer(emoji));
+            }
+
+            // Animate them
+            let interval = setInterval(() => {
+                // Move each emoji
+                for (let b of emojis) {
+                    b.move();
+                }
+
+                // Check for collisions
+                for (let i = 0; i < emojis.length; i++) {
+                    for (let j = i + 1; j < emojis.length; j++) {
+                        if (emojis[i].collidesWith(emojis[j])) {
+                            emojis[i].bounceOff(emojis[j]);
+                        }
+                    }
+                }
+            }, 30);
+
+            // Stop after 15 seconds
+            setTimeout(() => {
+                clearInterval(interval);
+                for (let b of emojis) {
+                    b.el.remove();
+                }
+            }, 15000);
+
+            return false; // prevent reload
+        }
+    </script>
+</body>
+</html>
